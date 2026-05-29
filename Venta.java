@@ -6,9 +6,10 @@ public class Venta {
     private double total;
     private String metodoPago;
     private Producto[] productos;
+    private static int tmp = 1000;
     
     public Venta() {
-        this.folioTicket = 0;
+        this.folioTicket = tmp++;
         this.fechaHora = new Date();
         this.total = 0.0;
         this.metodoPago = "Default";
@@ -16,7 +17,7 @@ public class Venta {
     }
 
     public Venta(int folioTicket, Date fechaHora, double total, String metodoPago, Producto[] productos) {
-        this.folioTicket = folioTicket;
+        this.folioTicket = tmp++;
         this.fechaHora = fechaHora;
         this.total = total;
         this.metodoPago = metodoPago;
@@ -62,4 +63,18 @@ public class Venta {
     public void setProductos(Producto[] productos) {
         this.productos = productos;
     }
+    //ticket
+    public String generarTicket() {
+        StringBuilder ticket = new StringBuilder();
+        ticket.append("Folio Ticket: ").append(folioTicket).append("\n");
+        ticket.append("Fecha y Hora: ").append(fechaHora).append("\n");
+        ticket.append("Método de Pago: ").append(metodoPago).append("\n");
+        ticket.append("Productos:\n");
+        for (Producto producto : productos) {
+            ticket.append("- ").append(producto.getNombre()).append(": $").append(producto.getPrecio()).append("\n");
+        }
+        ticket.append("Total: $").append(total).append("\n");
+        return ticket.toString();
+    }
+
 }
